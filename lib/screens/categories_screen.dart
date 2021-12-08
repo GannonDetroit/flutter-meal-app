@@ -11,7 +11,6 @@ class CategoriesScreen extends StatelessWidget {
     //childAspectRatio helps you set height in regard to the width (so if width is set to 200, 3/2 ratio means height will be 300)
 
     return Scaffold(
-      appBar: AppBar(title: const Text('DeliMeal')),
       body: GridView(
         padding: const EdgeInsets.all(25),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
