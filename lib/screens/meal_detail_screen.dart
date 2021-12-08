@@ -81,6 +81,14 @@ class MealDetailScreen extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.delete),
+        onPressed: () {
+          //pop removes screens from the top of the stack, providing a way to 'go back a screen' used in navition and to remove certain UI overlays (like a diaglog or pop up).
+          //we can also pass data to pop if we want, like the mealId.
+          Navigator.of(context).pop(mealId);
+        },
+      ),
     );
   }
 }

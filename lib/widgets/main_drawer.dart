@@ -41,7 +41,8 @@ class MainDrawer extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             onTap: () {
-              Navigator.of(context).pushNamed('/'); //this is the home route
+              Navigator.of(context).pushReplacementNamed(
+                  '/'); //this is the home route, use replacementNamed to avoid infinite stack performance issues.
             },
           ),
           ListTile(
@@ -57,7 +58,8 @@ class MainDrawer extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
             onTap: () {
-              Navigator.of(context).pushNamed(FiltersScreen.routeName);
+              Navigator.of(context)
+                  .pushReplacementNamed(FiltersScreen.routeName);
             },
           )
         ],

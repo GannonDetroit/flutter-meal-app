@@ -9,6 +9,7 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function removeItem;
 
   MealItem(
       {@required this.id,
@@ -16,7 +17,8 @@ class MealItem extends StatelessWidget {
       @required this.imageUrl,
       @required this.affordability,
       @required this.complexity,
-      @required this.duration});
+      @required this.duration,
+      @required this.removeItem});
 
   //using a getter to dynamically compute a variables value.
   String get complexityText {
@@ -54,7 +56,15 @@ class MealItem extends StatelessWidget {
   }
 
   void selectMeal(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: id);
+    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: id)
+        //THIS IS TRICKY, note that this .then runs after the page has been popped. NOT after the new page has been pushed. This .then is used when
+        //passing data from a .pop() in the meal_deatil_screen.
+        .then((result) {
+      if (result != null) {
+        removeItem(result);
+      }
+      ;
+    });
   }
 
   @override
