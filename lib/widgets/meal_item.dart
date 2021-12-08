@@ -18,7 +18,7 @@ class MealItem extends StatelessWidget {
       @required this.affordability,
       @required this.complexity,
       @required this.duration,
-      @required this.removeItem});
+      this.removeItem});
 
   //using a getter to dynamically compute a variables value.
   String get complexityText {

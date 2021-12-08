@@ -2,18 +2,32 @@ import 'package:flutter/material.dart';
 import './categories_screen.dart';
 import './favorites_screen.dart';
 import '../widgets/main_drawer.dart';
+import '../models/meal.dart';
 
 class TabsScreen extends StatefulWidget {
+  final List<Meal> favoriteMeals;
+
+  TabsScreen(this.favoriteMeals);
+
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  //a list of the different pages/screen I want my nav tabs to have access to.
-  final List<Map<String, Object>> _pages = [
-    {'page': CategoriesScreen(), 'title': 'Categories'},
-    {'page': FavoritesScreen(), 'title': 'Your Favorites'},
-  ];
+  //a list of the different pages/screen I want my nav tabs to have access to. (since the widget.favorites doesn't work unless its in the build method or initState, i had to move this intializationto initstate)
+  List<Map<String, Object>> _pages;
+
+  @override
+  void initState() {
+    _pages = [
+      {'page': CategoriesScreen(), 'title': 'Categories'},
+      {
+        'page': FavoritesScreen(widget.favoriteMeals),
+        'title': 'Your Favorites'
+      },
+    ];
+    super.initState();
+  }
 
   //how I'll select which page to visit.
   int _selectedPageIndex = 0;

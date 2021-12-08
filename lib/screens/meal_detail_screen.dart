@@ -3,6 +3,10 @@ import '../dummy_data.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
+  final Function toggleFavorite;
+  final Function isFavorite;
+
+  MealDetailScreen(this.toggleFavorite, this.isFavorite);
 
 //this is just a block of code to help me avoid some code duplication down below. this is called a builder method.
   Widget buildSectionTitle(BuildContext context, String text) {
@@ -82,12 +86,16 @@ class MealDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () {
-          //pop removes screens from the top of the stack, providing a way to 'go back a screen' used in navition and to remove certain UI overlays (like a diaglog or pop up).
-          //we can also pass data to pop if we want, like the mealId.
-          Navigator.of(context).pop(mealId);
-        },
+        // child: Icon(Icons.delete),
+        // onPressed: () {
+        //   //pop removes screens from the top of the stack, providing a way to 'go back a screen' used in navition and to remove certain UI overlays (like a diaglog or pop up).
+        //   //we can also pass data to pop if we want, like the mealId.
+        //   Navigator.of(context).pop(mealId);
+        // },
+
+        //Icon checks if this meal is favorted or not, if its filled star, if not empy star.
+        child: Icon(isFavorite(mealId) ? Icons.star : Icons.star_border),
+        onPressed: () => toggleFavorite(mealId),
       ),
     );
   }
